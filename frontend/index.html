@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Complaint Management Portal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Complaint Management Portal</h1>
+    <nav>
+      <button onclick="showSection('loginSection')">Login</button>
+      <button onclick="showSection('registerSection')">Register</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- LOGIN -->
+    <section id="loginSection" class="section">
+      <h2>Login</h2>
+      <label>Role:
+        <select id="loginRole">
+          <option value="student">Student</option>
+          <option value="faculty">Faculty/Staff</option>
+          <option value="technician">Technician</option>
+          <option value="admin">Admin/Facility Manager</option>
+        </select>
+      </label>
+      <input id="loginUser" type="text" placeholder="Email/Username" />
+      <input id="loginPass" type="password" placeholder="Password" />
+      <button onclick="login()">Login</button>
+    </section>
+
+    <!-- REGISTER (NO ADMIN OPTION) -->
+    <section id="registerSection" class="section" style="display:none;">
+      <h2>Register</h2>
+      <label>
+        Role:
+        <select id="registerRole" onchange="updateRegisterFormFields()">
+          <option value="student">Student</option>
+          <option value="faculty">Faculty/Staff</option>
+          <option value="technician">Technician</option>
+          <option value="admin">Admin/Facility Manager</option>
+          <!-- ADMIN REMOVED -->
+        </select>
+      </label>
+      <input id="registerName" type="text" placeholder="Full Name" />
+      <input id="registerEmail" type="email" placeholder="Email" />
+      <input id="registerDept" type="text" placeholder="Department" />
+      <input id="registerPass" type="password" placeholder="Password" />
+      <button onclick="register()">Register</button>
+    </section>
+
+    <!-- USER DASHBOARD -->
+    <section id="userComplaintSection" class="section" style="display:none;">
+      <h2>Submit Complaint</h2>
+      <select id="complaintCategory">
+        <option>Electrical</option>
+        <option>IT</option>
+        <option>Plumbing</option>
+        <option>Other</option>
+      </select>
+      <input id="complaintTitle" type="text" placeholder="Complaint Title" />
+      <textarea id="complaintDesc" rows="3" placeholder="Describe your complaint"></textarea>
+      <input type="file" id="complaintImage" accept="image/*" />
+      <button onclick="submitComplaint()">Submit</button>
+
+      <h3>My Complaints</h3>
+      <div id="complaintList"></div>
+    </section>
+
+    <!-- FEEDBACK MODAL -->
+    <div id="feedbackModal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('feedbackModal')">x</span>
+        <h3>Rate Complaint Resolution</h3>
+        <label>Rating:
+          <select id="feedbackRating">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </label>
+        <textarea id="feedbackText" placeholder="Leave feedback"></textarea>
+        <button onclick="submitFeedback()">Submit</button>
+      </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <section id="adminSection" class="section" style="display:none;">
+      <h2>All Complaints</h2>
+      <div id="allComplaints"></div>
+      <h3>Reports</h3>
+      <button onclick="generateReport()">Refresh Reports</button>
+      <div id="reports"></div>
+    </section>
+
+    <!-- TECHNICIAN DASHBOARD -->
+    <section id="techSection" class="section" style="display:none;">
+      <h2>Assigned Complaints</h2>
+      <div id="assignedComplaints"></div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Complaint Management System
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
